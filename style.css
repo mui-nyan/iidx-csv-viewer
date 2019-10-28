@@ -5,7 +5,28 @@ td[data-cleartype="FULLCOMBO CLEAR"] {
 @keyframes fullcombo {
     from { color: #33ddff; }
     to   { color: #0088ff; }
-  }
+}
+
+td[data-mode="Beginner"] {
+    color: #00ff88;
+    text-shadow: 0 0 2px black;
+}
+td[data-mode="Normal"] {
+    color: #0088ff;
+    text-shadow: 0 0 2px black;
+}
+td[data-mode="Hyper"] {
+    color: #ffff00;
+    text-shadow: 0 0 2px black;
+}
+td[data-mode="Another"] {
+    color: #ff3333;
+    text-shadow: 0 0 2px black;
+}
+td[data-mode="Leggendaria"] {
+    color: #ff00ff;
+    text-shadow: 0 0 2px black;
+}
 
 td[data-cleartype="EX HARD CLEAR"] {
     color: #ffff00;

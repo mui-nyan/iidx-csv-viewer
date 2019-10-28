@@ -26,18 +26,23 @@
 
     function cleansingClearType(row) {
         if (row[INDEX_BEGINNER_DIFFICULTY] == 0) {
+            row[INDEX_BEGINNER_DIFFICULTY] = "";
             row[INDEX_BEGINNER_CLEARTYPE] = "";
         }
         if (row[INDEX_NORMAL_DIFFICULTY] == 0) {
+            row[INDEX_NORMAL_DIFFICULTY] = "";
             row[INDEX_NORMAL_CLEARTYPE] = "";
         }
         if (row[INDEX_HYPER_DIFFICULTY] == 0) {
+            row[INDEX_HYPER_DIFFICULTY] = "";
             row[INDEX_HYPER_CLEARTYPE] = "";
         }
         if (row[INDEX_ANOTHER_DIFFICULTY] == 0) {
+            row[INDEX_ANOTHER_DIFFICULTY] = "";
             row[INDEX_ANOTHER_CLEARTYPE] = "";
         }
         if (row[INDEX_LEGGENDARIA_DIFFICULTY] == 0) {
+            row[INDEX_LEGGENDARIA_DIFFICULTY] = "";
             row[INDEX_LEGGENDARIA_CLEARTYPE] = "";
         }
         return row;
@@ -57,6 +62,11 @@
             .map(cleansingClearType)
             .map(r => `<tr>
                     <td>${r[INDEX_TITLE]}</td>
+                    <td data-mode="Beginner">${r[INDEX_BEGINNER_DIFFICULTY]}</td>
+                    <td data-mode="Normal">${r[INDEX_NORMAL_DIFFICULTY]}</td>
+                    <td data-mode="Hyper">${r[INDEX_HYPER_DIFFICULTY]}</td>
+                    <td data-mode="Another">${r[INDEX_ANOTHER_DIFFICULTY]}</td>
+                    <td data-mode="Leggendaria">${r[INDEX_LEGGENDARIA_DIFFICULTY]}</td>
                     <td data-cleartype="${r[INDEX_BEGINNER_CLEARTYPE]}">${r[INDEX_BEGINNER_CLEARTYPE]}</td>
                     <td data-cleartype="${r[INDEX_NORMAL_CLEARTYPE]}">${r[INDEX_NORMAL_CLEARTYPE]}</td>
                     <td data-cleartype="${r[INDEX_HYPER_CLEARTYPE]}">${r[INDEX_HYPER_CLEARTYPE]}</td>
