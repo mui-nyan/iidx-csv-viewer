@@ -1,0 +1,32 @@
+td[data-cleartype="FULLCOMBO CLEAR"] {
+    animation: fullcombo 0.4s infinite alternate;
+    text-shadow: 0 0 2px black;
+}
+@keyframes fullcombo {
+    from { color: #33ddff; }
+    to   { color: #0088ff; }
+  }
+
+td[data-cleartype="EX HARD CLEAR"] {
+    color: #ffff00;
+    text-shadow: 0 0 2px black;
+}
+
+td[data-cleartype="HARD CLEAR"] {
+    color: #ff0000;
+    text-shadow: 0 0 2px black;
+}
+
+td[data-cleartype="CLEAR"] {
+    color: #0088ff;
+    text-shadow: 0 0 2px black;
+}
+
+td[data-cleartype="EASY CLEAR"] {
+    color: #00ff88;
+    text-shadow: 0 0 2px black;
+}
+
+#tableBody tr:nth-of-type(odd){
+    background-color: rgb(243, 243, 243);
+}
