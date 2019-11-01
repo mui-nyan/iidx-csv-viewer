@@ -48,19 +48,9 @@
         return row;
     }
 
-    function fileLoad() {
-        let text = reader.result;
-        let table = text.split(/[\r\n]+/).map(s => s.split(","))
-        // console.log(table);
-        let headers = table[0];
-        let rows = table.slice(1);
-        console.log(headers)
-        console.log(rows);
-
+    function renderingMusicTable(musics){
         let rows_html = (
-            rows.filter(r => r[INDEX_TITLE] !== undefined)
-            .map(cleansingClearType)
-            .map(r => `<tr>
+            musics.map(r => `<tr>
                     <td>${r[INDEX_TITLE]}</td>
                     <td data-mode="Beginner">${r[INDEX_BEGINNER_DIFFICULTY]}</td>
                     <td data-mode="Normal">${r[INDEX_NORMAL_DIFFICULTY]}</td>
@@ -78,6 +68,22 @@
         document.getElementById("tableBody").innerHTML = rows_html;
     }
 
+    function loadMusicsFromCsv(csv) {
+        let table = csv.split(/[\r\n]+/).map(s => s.split(","))
+        // console.log(table);
+        let headers = table[0];
+        let rows = table.slice(1);
+        console.log(headers)
+        console.log(rows);
+
+        let musics = (
+            rows.filter(r => r[INDEX_TITLE] !== undefined)
+            .map(cleansingClearType)
+        );
+        renderingMusicTable(musics)
+    }
+
     inputFile.addEventListener('change', fileChange, false);
-    reader.addEventListener('load', fileLoad, false);
+    reader.addEventListener('load', () => loadMusicsFromCsv(reader.result), false);
+
 })();
