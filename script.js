@@ -104,7 +104,7 @@
         ["HS", "HAPPY SKY"],
         ["DD", "DistorteD"],
         ["GOLD", "GOLD"],
-        ["DJT", "DJ TOROOPERS"],
+        ["DJT", "DJ TROOPERS"],
         ["EMP", "EMPRESS"],
         ["SIR", "SIRIUS"],
         ["RA", "Resort Anthem"],
