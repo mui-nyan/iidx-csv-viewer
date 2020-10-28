@@ -155,7 +155,8 @@
         ["SIN", "SINOBUZ"],
         ["CB", "CANNON BALLERS"],
         ["Roo", "Rootage"],
-        ["HV", "HEROIC VERSE"]
+        ["HV", "HEROIC VERSE"],
+        ["BST", "BISTROVER"]
     ];
     versionHtml = versions.map(v => `
         <input type="checkbox" name="version_check" class="version_check" id="version_${v[0]}" value="${v[1]}">
