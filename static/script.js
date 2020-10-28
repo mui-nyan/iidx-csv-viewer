@@ -17,6 +17,31 @@
 
     let inputFile = document.getElementById('file');
     let reader = new FileReader();
+    let difficultyTable = {
+        normal: null,
+        hard: null,
+        exh: null
+    };
+    const jsonUrl = {
+        normal: URL_FOR_NORMAL_JSON,
+        hard: URL_FOR_HARD_JSON,
+        exh: URL_FOR_EXH_JSON,
+    }
+    function loadDifficultyTable(name){
+        return fetch(jsonUrl[name])
+            .then(response => {
+                return response.json();
+            });
+    }
+    loadDifficultyTable("normal").then(json => {
+        difficultyTable.normal = json;
+    });
+    loadDifficultyTable("hard").then(json => {
+        difficultyTable.hard = json;
+    });
+    loadDifficultyTable("exh").then(json => {
+        difficultyTable.exh = json;
+    });
 
     function fileChange(ev) {
         let target = ev.target;
@@ -71,6 +96,19 @@
         document.getElementById("tableBody").innerHTML = rows_html;
     }
 
+    function renderingDifficultyTable(scores){
+        let rows_html = (
+            scores.map(s => `<tr>
+                    <td>${s.level}</td>
+                    <td>${s.title}</td>
+                    <td>${s.mode}</td>
+                    <td>${s.clearType}</td>
+                </tr>`)
+            .join("\n")
+        );
+        document.getElementById("tableBody_exh").innerHTML = rows_html;
+    }
+
     function loadMusicsFromCsv(csv) {
         let table = csv.split(/[\r\n]+/).map(s => s.split(","))
         // console.log(table);
@@ -83,7 +121,8 @@
             rows.filter(r => r[INDEX_TITLE] !== undefined)
             .map(cleansingClearType)
         );
-        renderingMusicTable(musics)
+        renderingMusicTable(musics);
+        renderingDifficultyTable(convertMusicsWithDifficultyTable(musics, difficultyTable.exh));
     }
 
     inputFile.addEventListener('change', fileChange, false);
@@ -134,4 +173,42 @@
         renderingMusicTable(filteredMusics);
     }
     document.querySelectorAll(".version_check").forEach(elm => elm.onchange = onFilterChange)
+
+    function convertMusicsWithDifficultyTable(musics, difficultyTable){
+        converted = [];
+        difficultyTable.forEach(s => {
+            let level = s[0];
+            let title = s[1];
+            let mode = s[2];
+
+            let music = musics.find(m => m[INDEX_TITLE] == title);
+            let clearType;
+            if (music != null) {
+                switch(mode.toLowerCase()) {
+                    case "h":
+                        clearType = music[INDEX_HYPER_CLEARTYPE];
+                        break;
+                    case "a":
+                        clearType = music[INDEX_ANOTHER_CLEARTYPE];
+                        break;
+                    case "l":
+                        clearType = music[INDEX_LEGGENDARIA_CLEARTYPE];
+                        break;
+                    default:
+                        console.warn(`Invalid socre mode: ${mode}`);
+                }
+            } else {
+                clearType = "NO PLAY"
+                console.info(`Not found in csv-data: ${title}`)
+            }
+            converted.push({
+                level: level,
+                title: title,
+                mode: mode,
+                clearType: clearType
+            });
+        });
+        return converted;
+    }
+    
 })();

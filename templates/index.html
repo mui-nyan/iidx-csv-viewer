@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Document</title>
+
+    <script>
+        const URL_FOR_NORMAL_JSON = "{{ url_for('static', filename='data/normal.json') }}";
+        const URL_FOR_HARD_JSON   = "{{ url_for('static', filename='data/hard.json') }}";
+        const URL_FOR_EXH_JSON    = "{{ url_for('static', filename='data/exh.json') }}";
+    </script>
 </head>
 <body>
-    CSVファイルを選択 <input type="file" id="file">
+    <p>表示方法 曲リスト ノマゲ難易度表 ハード難易度表 エクハ難易度表</p>
+    <p>CSVファイルを選択 <input type="file" id="file"></p>
     <details>
         <summary>バージョンで絞り込み</summary>
         <div id="versionFilters"><!--
@@ -37,6 +44,17 @@
         </tbody>
     </table>
 
-    <script src="script.js"></script>
+    <table>
+        <thead>
+            <th>難度</th>
+            <th>曲名</th>
+            <th>譜面モード</th>
+            <th>クリアタイプ</th>
+        </thead>
+        <tbody id="tableBody_exh">
+        </tbody>
+    </table>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
